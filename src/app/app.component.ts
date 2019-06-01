@@ -126,7 +126,8 @@ function flatten(root) {
 function Links(nodes) {
   return merge(nodes.map(function(parent) {
     return (parent.children || []).map(function(child) {
-      return {source: parent, target: child};
+      // 在此处控制，返回的 source 与 target
+      return {source: parent.name, target: child.name};
     });
   }));
 }
