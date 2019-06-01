@@ -59,28 +59,30 @@ export class AppComponent implements  AfterContentInit {
   public update() {
     // console.log(this.root);
     const nodes = flatten(this.root);
-    // console.log(nodes)
+    console.log(nodes)
 
     // const hierarchy = d3.hierarchy(this.root);
     // console.log(hierarchy);
     // const tree = d3.tree();
     // const links = tree(hierarchy).links();
-    console.log(Links(nodes))
+    // console.log(Links(nodes))
     // const linksPath = links.map((cur, i, arr) => {
     //   if (i === 0){
     //     console.log(cur.source.data);
     //   }
     // })
+    const links = Links(nodes);
 
-    // this.force.nodes(nodes)
-    //   .force("charge", d3.forceManyBody().strength(-1500))
-    //   .force('links', d3.forceLink(links).id(function(d){
-    //     // console.log(d);
+    this.force.nodes(nodes)
+      .force("charge", d3.forceManyBody().strength(-1500))
+      .force('links', d3.forceLink(links).id(function(d){
+        return (d as any).name;
+      }))
+      .force("x", d3.forceX(this.w / 2))
+      .force("y", d3.forceY(this.h / 2))
 
-    //     return (d as any).id;
-    //   }))
-    //   .force("x", d3.forceX(this.w / 2))
-    //   .force("y", d3.forceY(this.h / 2))
+    // console.log(links);
+
 
 
   }
