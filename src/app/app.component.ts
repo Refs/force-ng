@@ -88,7 +88,7 @@ export class AppComponent implements AfterContentInit {
 
     var nodeEnter = node.enter().append('g')
       .attr("class", "node")
-      .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; })
+      // .attr("transform", function (d) { return "translate(" + d.x + "," + d.y + ")"; })
     // .on("click", click)
     // .call(force.drag);
 
@@ -96,12 +96,12 @@ export class AppComponent implements AfterContentInit {
       .attr("r", function (d) { return Math.sqrt(d.size) / 10 || 4.5; })
       .style("fill", "#eee");
 
-    var images = nodeEnter.append("svg:image")
-      .attr("xlink:href", function (d) { return d.img; })
-      .attr("x", function (d) { return -25; })
-      .attr("y", function (d) { return -25; })
-      .attr("height", 50)
-      .attr("width", 50);
+    // var images = nodeEnter.append("svg:image")
+    //   .attr("xlink:href", function (d) { return d.img; })
+    //   .attr("x", function (d) { return -25; })
+    //   .attr("y", function (d) { return -25; })
+    //   .attr("height", 50)
+    //   .attr("width", 50);
 
     node.exit().remove();
 
@@ -120,6 +120,10 @@ export class AppComponent implements AfterContentInit {
           + d.target.x + ","
           + d.target.y;
       });
+      node.attr("transform", d => {
+        // d.x & d.y are NaN for new nodes
+        return "translate(" + d.x + "," + d.y + ")";
+    });
       // node.attr("transform", nodeTransform);
     }
 
